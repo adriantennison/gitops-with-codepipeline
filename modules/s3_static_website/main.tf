@@ -29,6 +29,7 @@ data "aws_iam_policy_document" "bucket_policy" {
       identifiers = ["*"]
     }
   }
+  depends_on = [ aws_s3_bucket_acl.public_access ]
 }
 
 resource "aws_s3_bucket_policy" "getting_object" {
