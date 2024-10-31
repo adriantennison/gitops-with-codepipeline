@@ -39,7 +39,7 @@ module "error_html" {
 
 output "website_url" {
   description = "URL to access the website"
-  value       = module.aws_s3_bucket_website_configuration.website_config.website_endpoint
+  value       = module.s3_static_website.website_endpoint
 }
 
 module "sample_secret" {

@@ -35,7 +35,9 @@ phases:
       - terraform validate
       - echo "Running Terratest"
       - cd tests && go test -v
-  post_build:
-    commands:
       - echo "Applying Terraform plan"
       - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo "Checking if Terraform destroy should run"
+      - if [ "$RUN_DESTROY" == "true" ]; then terraform destroy -auto-approve; else echo "Skipping terraform destroy"; fi
