@@ -14,7 +14,6 @@ locals {
 
 module "s3_static_website" {
   source = "./modules/s3_static_website"
-  version = "~> 1.0"
   bucket_name = local.bucket_name
   tags        = var.common_tags
 }
