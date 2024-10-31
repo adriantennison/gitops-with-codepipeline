@@ -20,7 +20,8 @@ data "aws_iam_policy_document" "codebuild_policy" {
       "s3:GetObject",
       "s3:PutObject",
       "s3:DeleteObject",
-      "s3:PutObjectAcl"
+      "s3:PutObjectAcl",
+      "s3:PutBucketPolicy"
     ]
     resources = [
       "arn:aws:s3:::${module.s3_static_website.bucket_id}",
