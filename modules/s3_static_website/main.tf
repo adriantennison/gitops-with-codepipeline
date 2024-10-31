@@ -22,7 +22,7 @@ resource "aws_s3_bucket_acl" "public_access" {
 
 data "aws_iam_policy_document" "bucket_policy" {
   statement {
-    actions   = ["s3:GetObject"]
+    actions   = ["s3:GetObject","s3:PutBucketPolicy"]
     resources = ["${aws_s3_bucket.this.arn}/*"]
     principals {
       type        = "AWS"
