@@ -1,4 +1,4 @@
-version: 0.2 
+version: 0.2
 
 phases:
   install:
@@ -6,17 +6,23 @@ phases:
       python: 3.x
       golang: 1.x
     commands:
+      - echo "Setting up GOPATH and installing dependencies"
+      - export GOPATH=$HOME/go
+      - export PATH=$PATH:$GOPATH/bin
+      - mkdir -p $GOPATH/bin
       - echo "Installing Terraform, Checkov, and Terratest dependencies"
       - wget https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
       - unzip terraform_1.5.0_linux_amd64.zip -d /usr/local/bin/
-      - pip install --upgrade pip 
+      - pip install --upgrade pip
       - pip install checkov
   pre_build:
     commands:
+      - echo "Checking Go version"
+      - go version
       - echo "Initializing Go module"
       - go mod init example.com/myproject
       - echo "Installing Terratest with go install"
-      - go install github.com/gruntwork-io/terratest/modules/terraform@latest
+      - go install github.com/gruntwork-io/terratest@latest
       - echo "Initializing Terraform"
       - terraform init
       - echo "Running Checkov for compliance scanning"
