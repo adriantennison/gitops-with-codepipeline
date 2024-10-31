@@ -35,6 +35,7 @@ phases:
       - terraform validate
       - echo "Running Terratest"
       - cd tests && go test -v
+      - cd ..
       - echo "Applying Terraform plan"
       - terraform apply -auto-approve
   post_build:
