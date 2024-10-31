@@ -10,7 +10,7 @@ resource "random_string" "suffix" {
 
 
 locals {
-  bucket_name = "${var.bucket_prefix}-lower(${random_string.suffix.result})"
+  bucket_name = "${var.bucket_prefix}-${random_string.suffix.result}"
 }
 
 module "s3_static_website" {
