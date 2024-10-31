@@ -5,5 +5,5 @@ output "bucket_id" {
 
 output "website_endpoint" {
   description = "Website endpoint URL"
-  value       = aws_s3_bucket.this.website_endpoint
+  value       = aws_s3_bucket_website_configuration.website_config.website_endpoint
 }

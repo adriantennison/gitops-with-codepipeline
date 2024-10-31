@@ -25,6 +25,7 @@ module "index_html" {
   object_key   = "index.html"
   source_file  = "${path.module}/files/index.html"
   content_type = "text/html"
+  depends_on = [ module.s3_static_website ]
 }
 
 module "error_html" {
@@ -33,11 +34,12 @@ module "error_html" {
   object_key   = "error.html"
   source_file  = "${path.module}/files/error.html"
   content_type = "text/html"
+  depends_on = [ module.s3_static_website ]
 }
 
 output "website_url" {
   description = "URL to access the website"
-  value       = module.s3_static_website.website_endpoint
+  value       = module.aws_s3_bucket_website_configuration.website_config.website_endpoint
 }
 
 module "sample_secret" {
