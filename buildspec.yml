@@ -9,11 +9,14 @@ phases:
       - echo "Installing Terraform, Checkov, and Terratest dependencies"
       - wget https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
       - unzip terraform_1.5.0_linux_amd64.zip -d /usr/local/bin/
+      - pip install --upgrade pip 
       - pip install checkov
-      - go get github.com/gruntwork-io/terratest/modules/terraform
-      - go get github.com/stretchr/testify/assert
   pre_build:
     commands:
+      - echo "Initializing Go module"
+      - go mod init example.com/myproject
+      - echo "Installing Terratest with go install"
+      - go install github.com/gruntwork-io/terratest/modules/terraform@latest
       - echo "Initializing Terraform"
       - terraform init
       - echo "Running Checkov for compliance scanning"
