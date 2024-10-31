@@ -1,0 +1,30 @@
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+      golang: 1.x
+    commands:
+      - echo "Installing Terraform, Checkov, and Terratest dependencies"
+      - wget https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+      - unzip terraform_1.5.0_linux_amd64.zip -d /usr/local/bin/
+      - pip install checkov
+      - go get github.com/gruntwork-io/terratest/modules/terraform
+      - go get github.com/stretchr/testify/assert
+  pre_build:
+    commands:
+      - echo "Initializing Terraform"
+      - terraform init
+      - echo "Running Checkov for compliance scanning"
+      - checkov -d .
+  build:
+    commands:
+      - echo "Formatting Terraform code"
+      - terraform fmt -check -recursive
+      - echo "Validating Terraform code"
+      - terraform validate
+      - echo "Running Terratest"
+      - cd tests && go test -v
+  post_build:
+    commands:
+      - echo "Applying Terraform plan"
+      - terraform apply -auto-approve
