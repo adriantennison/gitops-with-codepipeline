@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "bucket_prefix" {
   description = "Prefix for the S3 bucket name"
   type        = string
-  default     = "my-gitops-website"
+  default     = "mygitopswebsite"
 }
 
 variable "common_tags" {
